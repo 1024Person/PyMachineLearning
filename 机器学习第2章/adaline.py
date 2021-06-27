@@ -6,7 +6,7 @@
 @Author  :   1024Person
 @Version :   1.0
 @Contact :   822713663@qq.com
-@Desc    :   None
+@Desc    :   批量梯度下降算法
 @License :
 '''
 
@@ -43,7 +43,13 @@ class Adaline:
             output = self.activation(z)
             # errors是预测值和真实值之间的偏差，
             errors = (Y - output)
-            update = self.eta * X.T.dot(errors)
+            """
+            X.shape = (n_sample n_feature)
+            errors = (n_sample , 1)
+            X.T.shape = (n_feature,n_sample)
+            X.T.dot(errors).shape = (n_feature,1)
+            """
+            update = self.eta * X.T.dot(errors) 
             self.w_[1:] += update
             self.w_[0] += errors.sum() * self.eta
             # cost和errors的平方成正比，所以这里cost越小就代表着误差越小
