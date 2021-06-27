@@ -39,3 +39,34 @@ $$
 
 
 这里通过感知机进行分类，之所以能够成功的原因是原本的数据本身就是线性可分的 ，如果遇到了一个线性不可分的话，那么最终会不停的迭代,不停的更新权重，最终也不会收敛，得到的感知机也不会是一个合格的机器
+
+## 自适应神经元
+
+代价函数(**误差平方和SEE**)：
+$$
+J(\omega) = \frac12 \sum_i\Big( y^{(i)} -\phi\big( z^{i} \big) \Big)^2
+$$
+权重：$\omega$, 更新权重：
+$$
+\omega:=\omega + \Delta \omega
+$$
+$\Delta\omega$ 权重更新量：
+$$
+\Delta \omega = -\eta \bigtriangledown J(\omega)
+$$
+再写的详细清楚一点$\bigtriangledown$的下标$\omega_j$代表的是对$\omega_j$求导，并且$\bigtriangledown_{\omega_j} J = \frac{\partial J}{\partial \omega_j}$
+$$
+\Delta \omega_j = -\eta \bigtriangledown_{\omega_j} J(w)
+$$
+其中：$\bigtriangledown J(\omega) = \frac{\partial J}{\partial \omega}$ ，那么$\Delta \omega$的物理意义就显而易见了: $\Delta\omega$就是经过$\eta$的步长之后的$J(\omega)$的反向近似变化量
+
+对$\frac{\partial J}{\partial \omega}$求导之后得：
+$$
+\begin{align}
+\frac{\partial J}{\partial \omega_j} & = -\sum_i\Big( y^{(i)} - \phi\big( z^{(i)} \big) \Big)x_j^{(i)}
+\end{align}
+$$
+这样求导之后的物理意义，就是代价函数对第j个权重进行求导，得到了代价函数在$\omega_j$方向上的变化率（斜率）
+
+如果对所有的方向进行求导的话，就是梯度了
+

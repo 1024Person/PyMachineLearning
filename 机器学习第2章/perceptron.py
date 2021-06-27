@@ -77,7 +77,7 @@ def get_data_from_file(filepath):
     return df
 
 
-def plot_decision_regions(X, y, classifier, resolution=0.02):
+def plot_decision_regions(X, y, classifier, resolution=0.02,fignum = 1):
     marker = ('s', 'x', 'o', '^', 'v')
     colors = ('red', 'blue', 'lightgreen', 'cyan')
     cmap = ListedColormap(colors[:len(np.unique(y))])  # 产生一个颜色映射
@@ -97,6 +97,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     # 因为上面的z的形状是进行了一些调整，所以这里还要在调回来
     # xx1，是网格化之后的数据，所以xx1的形状就是整个网格的形状
     z = z.reshape(xx1.shape)
+    plt.figure(num=fignum)
     plt.contourf(xx1, xx2, z, alpha=0.3, cmap=cmap)
     plt.xlim(xx1.min(), xx1.max())
     plt.ylim(xx2.min(), xx2.max())
